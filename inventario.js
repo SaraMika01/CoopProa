@@ -1,15 +1,7 @@
-/* =========================================
-   ESPERAR A QUE CARGUE LA PÁGINA
-========================================= */
-
 document.addEventListener(
     "DOMContentLoaded",
     function () {
 
-
-        /* =====================================
-           ELEMENTOS
-        ===================================== */
 
         const buscador =
             document.getElementById("buscador");
@@ -26,66 +18,33 @@ document.addEventListener(
         const formulario =
             document.getElementById("formProducto");
 
-
-
-        /* =====================================
-           CATEGORÍA SELECCIONADA
-        ===================================== */
-
         let categoriaSeleccionada =
             "Todos";
 
-
-
-        /* =====================================
-           FUNCIÓN PARA FILTRAR PRODUCTOS
-        ===================================== */
-
         function filtrarProductos() {
-
-
-            /* Texto del buscador */
 
             const texto =
                 buscador.value
                     .trim()
                     .toLowerCase();
 
-
-            /* Buscar todas las tarjetas */
-
             const productos =
                 listaProductos.querySelectorAll(
                     ".inventory-card"
                 );
 
-
-            /* Recorrer productos */
-
             productos.forEach(
                 function (producto) {
-
-
-                    /* Obtener nombre */
 
                     const nombre =
                         producto.dataset.name
                             .toLowerCase();
 
-
-                    /* Obtener categoría */
-
                     const categoria =
                         producto.dataset.category;
 
-
-                    /* Comprobar texto */
-
                     const coincideTexto =
                         nombre.includes(texto);
-
-
-                    /* Comprobar categoría */
 
                     const coincideCategoria =
                         categoriaSeleccionada ===
@@ -93,9 +52,6 @@ document.addEventListener(
                         ||
                         categoria ===
                             categoriaSeleccionada;
-
-
-                    /* Mostrar u ocultar */
 
                     if (
                         coincideTexto &&
@@ -119,12 +75,6 @@ document.addEventListener(
 
         }
 
-
-
-        /* =====================================
-           BUSCADOR
-        ===================================== */
-
         if (buscador) {
 
             buscador.addEventListener(
@@ -134,12 +84,6 @@ document.addEventListener(
 
         }
 
-
-
-        /* =====================================
-           BOTONES DE CATEGORÍA
-        ===================================== */
-
         categorias.forEach(
             function (boton) {
 
@@ -147,9 +91,6 @@ document.addEventListener(
                 boton.addEventListener(
                     "click",
                     function () {
-
-
-                        /* Quitar activo */
 
                         categorias.forEach(
                             function (elemento) {
@@ -161,21 +102,12 @@ document.addEventListener(
                             }
                         );
 
-
-                        /* Activar botón */
-
                         boton.classList.add(
                             "active"
                         );
 
-
-                        /* Guardar categoría */
-
                         categoriaSeleccionada =
                             boton.dataset.category;
-
-
-                        /* Filtrar */
 
                         filtrarProductos();
 
@@ -185,11 +117,6 @@ document.addEventListener(
             }
         );
 
-
-
-        /* =====================================
-           BOTONES + Y -
-        ===================================== */
 
         if (listaProductos) {
 
