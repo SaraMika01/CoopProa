@@ -3,7 +3,7 @@ from contextlib import closing
 from datetime import date
 
 import mysql.connector
-from flask import Flask, flash, redirect, render_template, request, url_for
+from flask import Flask, flash, redirect, render_template, request, send_from_directory, url_for
 
 
 app = Flask(__name__, template_folder="temples", static_folder="static")
@@ -41,6 +41,53 @@ def preparar_esquema():
     """Agrega columnas nuevas sin borrar datos de instalaciones existentes."""
     with closing(conectar_db()) as conexion:
         with closing(conexion.cursor()) as cursor:
+            cursor.execute("SHOW COLUMNS FROM proveedores LIKE 'id_prov'")
+            if not cursor.fetchone():
+                cursor.execute("ALTER TABLE proveedores CHANGE COLUMN id id_prov INT AUTO_INCREMENT")
+            cursor.execute("SHOW COLUMNS FROM proveedores LIKE 'nombre_prov'")
+            if not cursor.fetchone():
+                cursor.execute("ALTER TABLE proveedores CHANGE COLUMN nombre nombre_prov VARCHAR(40) NOT NULL")
+
+            cursor.execute("SHOW COLUMNS FROM productos LIKE 'id_prod'")
+            if not cursor.fetchone():
+                cursor.execute("ALTER TABLE productos CHANGE COLUMN id id_prod INT AUTO_INCREMENT")
+            cursor.execute("SHOW COLUMNS FROM productos LIKE 'nombre_prod'")
+            if not cursor.fetchone():
+                cursor.execute("ALTER TABLE productos CHANGE COLUMN nombre nombre_prod VARCHAR(40) NOT NULL")
+            cursor.execute("SHOW COLUMNS FROM productos LIKE 'precio_costo'")
+            if not cursor.fetchone():
+                cursor.execute("ALTER TABLE productos ADD COLUMN precio_costo DECIMAL(10,2) NOT NULL DEFAULT 0 AFTER nombre_prod")
+            cursor.execute("SHOW COLUMNS FROM productos LIKE 'porcentaje_ganancia'")
+            if not cursor.fetchone():
+                cursor.execute("ALTER TABLE productos ADD COLUMN porcentaje_ganancia DECIMAL(10,2) NOT NULL DEFAULT 0 AFTER precio_costo")
+
+            cursor.execute("SHOW TABLES LIKE 'pagos_a_proveedores'")
+            if not cursor.fetchone():
+                cursor.execute("SHOW TABLES LIKE 'compras_a_proveedores'")
+                if cursor.fetchone():
+                    cursor.execute("RENAME TABLE compras_a_proveedores TO pagos_a_proveedores")
+            cursor.execute("SHOW COLUMNS FROM pagos_a_proveedores LIKE 'id_pagoprove'")
+            if not cursor.fetchone():
+                cursor.execute("ALTER TABLE pagos_a_proveedores CHANGE COLUMN id id_pagoprove INT AUTO_INCREMENT")
+            cursor.execute("SHOW COLUMNS FROM pagos_a_proveedores LIKE 'id_prov'")
+            if not cursor.fetchone():
+                cursor.execute("ALTER TABLE pagos_a_proveedores CHANGE COLUMN proveedor_id id_prov INT")
+            cursor.execute("SHOW COLUMNS FROM pagos_a_proveedores LIKE 'id_prod'")
+            if not cursor.fetchone():
+                cursor.execute("ALTER TABLE pagos_a_proveedores CHANGE COLUMN producto_id id_prod INT")
+            cursor.execute("SHOW COLUMNS FROM pagos_a_proveedores LIKE 'precio_pago'")
+            if not cursor.fetchone():
+                cursor.execute("ALTER TABLE pagos_a_proveedores CHANGE COLUMN precio_compra precio_pago DECIMAL(10,2) NOT NULL")
+            cursor.execute("SHOW COLUMNS FROM pagos_a_proveedores LIKE 'fecha_pago'")
+            if not cursor.fetchone():
+                cursor.execute("ALTER TABLE pagos_a_proveedores CHANGE COLUMN fecha_compra fecha_pago DATETIME DEFAULT CURRENT_TIMESTAMP")
+
+            cursor.execute("SHOW COLUMNS FROM historial_ventas LIKE 'nombre_prod'")
+            if not cursor.fetchone():
+                cursor.execute("ALTER TABLE historial_ventas CHANGE COLUMN nom_prod nombre_prod VARCHAR(50) NOT NULL")
+            cursor.execute("SHOW COLUMNS FROM historial_ventas LIKE 'fecha'")
+            if not cursor.fetchone():
+                cursor.execute("ALTER TABLE historial_ventas CHANGE COLUMN precio fecha DATETIME DEFAULT CURRENT_TIMESTAMP")
             cursor.execute("SHOW COLUMNS FROM productos LIKE 'categoria'")
             if not cursor.fetchone():
                 cursor.execute("ALTER TABLE productos ADD COLUMN categoria VARCHAR(40) NOT NULL DEFAULT 'General'")
@@ -160,6 +207,16 @@ def eliminar_venta(id_venta):
     ejecutar("DELETE FROM historial_ventas WHERE id_venta=%s", (id_venta,))
     flash("Venta eliminada del historial. El stock no se modifica automáticamente.", "warning")
     return redirect(url_for("ventas"))
+
+
+@app.route("/app.js")
+def app_js():
+    return send_from_directory(os.path.dirname(__file__), "app.js")
+
+
+@app.route("/inventario.js")
+def inventario_js():
+    return send_from_directory(os.path.dirname(__file__), "inventario.js")
 
 
 if __name__ == "__main__":

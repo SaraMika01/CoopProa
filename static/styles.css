@@ -36,6 +36,7 @@ img {
 button,input,select,textarea {
     font-family: inherit;
 }
+/* This box-shadow property is used to add depth to the navigation bar. */
 .navbar {
     min-height: 72px;
     background: var(--negro) !important;
