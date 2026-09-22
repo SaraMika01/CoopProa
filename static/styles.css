@@ -1,3 +1,4 @@
+/*This :root selector is used to define global CSS variables.*/
 :root {
     --azul: #5664bd;
     --azul-hover: #4654a8;
@@ -23,6 +24,7 @@
 html {
     scroll-behavior: smooth;
 }
+/*This body selector is used to set the page background and base text styles.*/
 body {
     margin: 0;
     background: #202121;
@@ -79,11 +81,13 @@ button,input,select,textarea {
 .page-container {
     width: min(1200px, 100%);
     min-height: calc(100vh - 72px);
+    /*This margin: 0 auto property is used to center the main container horizontally.*/
     margin: 0 auto;
     padding: 45px clamp(20px, 5vw, 65px) 80px;
     background: var(--fondo);
 }
 .page-title {
+    /*This display: flex property is used to align the hero content in a row.*/
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -119,6 +123,7 @@ button,input,select,textarea {
     justify-content: center;
     white-space: nowrap;
     padding: 9px 16px;
+    /*This border-radius property is used to round the corners of the dashboard cards.*/
     border-radius: 50px;
     background: var(--azul-suave);
     color: var(--azul);

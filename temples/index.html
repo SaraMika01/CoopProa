@@ -23,15 +23,12 @@
                 <!-- This <div> tag is used to group the menu links. 4-->
                 <div class="collapse navbar-collapse" id="menu">
                     <ul class="navbar-nav ms-auto">
-                        <!-- This <a> tag is used to create a link to the sales page. 5-->
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('ventas') }}"> Ventas</a>
                         </li>
-                        <!-- This <a> tag is used to create a link to the inventory page. 6-->
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('inventario') }}">Inventario </a>
                         </li>
-                        <!-- This <a> tag is used to create a link to the suppliers page. -->
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('proveedores') }}"> Proveedores</a>
                         </li>
@@ -39,6 +36,8 @@
                 </div>
             </div>
         </nav>
+
+    <!-- This <main> tag is used to contain the main content of the home page. -->
     <main class="page-container">
         <section class="hero-card">
             <div>
