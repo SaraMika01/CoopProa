@@ -3,18 +3,19 @@ from contextlib import closing
 from datetime import date
 
 import mysql.connector
-from flask import Flask, flash, redirect, render_template, request, send_from_directory, url_for
+from flask import Flask, flash, redirect, render_template, request, session,  send_from_directory, url_for
 
 
 app = Flask(__name__, template_folder="temples", static_folder="static")
+app.config["SESSION_COOKIE_HTTPONLY"] = True
+app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "coopproa-dev-key")
-
 
 def conectar_db():
     return mysql.connector.connect(
         host=os.getenv("DB_HOST", "localhost"),
         user=os.getenv("DB_USER", "root"),
-        password=os.getenv("DB_PASSWORD", "12345"),
+        password=os.getenv("DB_PASSWORD", "50037856xbts"),
         database=os.getenv("DB_NAME", "coopproa_db"),
     )
 
@@ -24,7 +25,6 @@ def consultar(sql, parametros=(), uno=False):
         with closing(conexion.cursor(dictionary=True)) as cursor:
             cursor.execute(sql, parametros)
             return cursor.fetchone() if uno else cursor.fetchall()
-
 
 def ejecutar(sql, parametros=(), varios=False):
     with closing(conectar_db()) as conexion:
@@ -97,17 +97,51 @@ def preparar_esquema():
             conexion.commit()
 
 
+
 @app.route("/")
 def inicio():
+    if not session.get("terminos_aceptados"):
+        return redirect(url_for("mostrar_terminos"))
+
     resumen = {
-        "productos": consultar("SELECT COUNT(*) AS total FROM productos", uno=True)["total"],
-        "proveedores": consultar("SELECT COUNT(*) AS total FROM proveedores", uno=True)["total"],
+        "productos": consultar(
+            "SELECT COUNT(*) AS total FROM productos",
+            uno=True
+        )["total"],
+        "proveedores": consultar(
+            "SELECT COUNT(*) AS total FROM proveedores",
+            uno=True
+        )["total"],
         "ventas_hoy": consultar(
-            "SELECT COALESCE(SUM(total), 0) AS total FROM historial_ventas WHERE DATE(fecha) = %s",
-            (date.today(),), uno=True
+            """SELECT COALESCE(SUM(total), 0) AS total
+               FROM historial_ventas WHERE DATE(fecha) = %s""",
+            (date.today(),),
+            uno=True
         )["total"],
     }
     return render_template("index.html", resumen=resumen)
+
+
+@app.route("/aceptar-terminos")
+def mostrar_terminos():
+    if session.get("terminos_aceptados"):
+        return redirect(url_for("inicio"))
+    return render_template("aceptar_terminos.html")
+
+
+@app.route("/decidir-terminos", methods=["POST"])
+def aceptar_terminos():
+    decision = request.form.get("decision")
+
+    if decision == "aceptar" and request.form.get("acepto") == "si":
+        session["terminos_aceptados"] = True
+        return redirect(url_for("inicio"))
+
+    session.pop("terminos_aceptados", None)
+    return render_template(
+        "aceptar_terminos.html",
+        rechazado=True
+    )
 
 @app.route("/terminos")
 def terminos():
@@ -226,16 +260,6 @@ def app_js():
 @app.route("/inventario.js")
 def inventario_js():
     return send_from_directory(os.path.dirname(__file__), "inventario.js")
-
-
-@app.route("/terminos")
-def terminos():
-    return render_template("terminos.html")
-
-
-@app.route("/privacidad")
-def privacidad():
-    return render_template("privacidad.html")
 
 
 if __name__ == "__main__":

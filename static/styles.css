@@ -892,3 +892,251 @@ button,input,select,textarea {
 .legal-links a:hover {
     text-decoration: underline;
 }
+
+/* ===== PANTALLA DE ACEPTACIÓN COOPPROA ===== */
+.pagina-terminos {
+    min-height: 100vh;
+    background: #f1f6fb;
+    color: #173b61;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Encabezado */
+.header-terminos {
+    background: linear-gradient(135deg, #164e78, #2876a5);
+    color: white;
+    padding: 22px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    box-shadow: 0 3px 12px rgba(15, 45, 75, 0.15);
+}
+
+.logo-terminos {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 750;
+}
+
+.subtitulo-header {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* Contenedor principal */
+.contenedor-terminos {
+    width: min(850px, calc(100% - 36px));
+    margin: 48px auto;
+    padding: 38px;
+    background: white;
+    border: 1px solid #e1eaf3;
+    border-radius: 18px;
+    box-shadow: 0 12px 35px rgba(31, 67, 101, 0.09);
+    box-sizing: border-box;
+}
+
+/* Icono y título */
+.icono-seguridad {
+    width: 68px;
+    height: 68px;
+    margin: 0 auto 18px;
+    border-radius: 20px;
+    background: #e5f1fc;
+    color: #216ba4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+}
+
+.contenedor-terminos h1 {
+    text-align: center;
+    color: #164a7b;
+    font-size: clamp(25px, 4vw, 34px);
+    margin: 0 0 14px;
+}
+
+.descripcion-terminos {
+    max-width: 650px;
+    margin: 0 auto 28px;
+    text-align: center;
+    color: #536c85;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/* Enlaces a los documentos */
+.documentos-terminos {
+    background: #f5f9fd;
+    border: 1px solid #dfebf7;
+    border-radius: 13px;
+    padding: 8px 22px;
+    margin-bottom: 25px;
+}
+
+.documento-terminos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 4px;
+}
+
+.documento-terminos + .documento-terminos {
+    border-top: 1px solid #dce7f1;
+}
+
+.documento-terminos h2 {
+    margin: 0 0 6px;
+    color: #174b7c;
+    font-size: 17px;
+}
+
+.documento-terminos p {
+    margin: 0;
+    color: #62778d;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.enlace-documento {
+    flex-shrink: 0;
+    padding: 10px;
+    border-radius: 8px;
+    color: #2679c5;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.enlace-documento:hover {
+    background: #e4effb;
+    text-decoration: underline;
+}
+
+/* Formulario */
+.pagina-terminos .contenedor-terminos form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.confirmacion-terminos {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 4px 0;
+    color: #294c70;
+    line-height: 1.6;
+    cursor: pointer;
+}
+
+.confirmacion-terminos input[type="checkbox"] {
+    width: 19px;
+    height: 19px;
+    margin-top: 3px;
+    flex-shrink: 0;
+    accent-color: #168451;
+    cursor: pointer;
+}
+
+/* Botones */
+.botones-terminos {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+}
+
+.boton-terminos {
+    flex: 1 1 220px;
+    min-height: 54px;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.boton-terminos:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 16px rgba(0, 0, 0, 0.13);
+}
+
+.boton-aceptar {
+    background: #168451;
+}
+
+.boton-aceptar:hover {
+    background: #116d41;
+}
+
+.boton-rechazar {
+    background: #e5484d;
+}
+
+.boton-rechazar:hover {
+    background: #c9343b;
+}
+
+/* Mensaje de rechazo */
+.mensaje-rechazo {
+    margin-bottom: 20px;
+    padding: 13px 16px;
+    background: #fff0f0;
+    color: #a51f2b;
+    border: 1px solid #f2c6c9;
+    border-radius: 9px;
+    line-height: 1.5;
+}
+
+/* Nota final */
+.nota-terminos {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid #e2eaf2;
+    text-align: center;
+    color: #71859a;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* Adaptación para celulares */
+@media (max-width: 600px) {
+    .header-terminos {
+        padding: 18px 20px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .contenedor-terminos {
+        margin: 22px auto;
+        padding: 24px 18px;
+    }
+
+    .documentos-terminos {
+        padding: 5px 13px;
+    }
+
+    .documento-terminos {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .botones-terminos {
+        flex-direction: column;
+    }
+
+    .boton-terminos {
+        flex-basis: auto;
+        width: 100%;
+    }
+}

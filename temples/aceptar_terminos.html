@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aceptación de términos - CoopProa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="pagina-terminos">
+
+    <header class="header-terminos">
+        <h2 class="logo-terminos"> CoopProa</h2>
+        <p class="subtitulo-header">
+            Cooperativa del colegio
+        </p>
+    </header>
+
+    <main class="contenedor-terminos">
+
+        <div class="icono-seguridad" aria-hidden="true">✓</div>
+
+        <h1>Bienvenido/a a CoopProa</h1>
+
+        <p class="descripcion-terminos">
+            Antes de ingresar al sistema, leé nuestros términos y
+            condiciones y nuestra política de privacidad.
+        </p>
+
+        {% if rechazado %}
+        <div class="mensaje-rechazo" role="alert">
+            Para ingresar a CoopProa, necesitás aceptar los términos
+            y condiciones y la política de privacidad.
+        </div>
+        {% endif %}
+
+        <section class="documentos-terminos">
+
+            <div class="documento-terminos">
+                <div>
+                    <h2>Términos y condiciones</h2>
+                    <p>
+                        Conocé las normas de uso del sistema y tus
+                        responsabilidades.
+                    </p>
+                </div>
+
+                <a class="enlace-documento"
+                   href="{{ url_for('terminos') }}"
+                   target="_blank" rel="noopener">
+                    Leer ↗
+                </a>
+            </div>
+
+            <div class="documento-terminos">
+                <div>
+                    <h2>Política de privacidad</h2>
+                    <p>
+                        Conocé cómo se protegen tus datos personales.
+                    </p>
+                </div>
+
+                <a class="enlace-documento"
+                   href="{{ url_for('privacidad') }}"
+                   target="_blank" rel="noopener">
+                    Leer ↗
+                </a>
+            </div>
+
+        </section>
+
+        <form method="POST" action="{{ url_for('aceptar_terminos') }}">
+
+            <label class="confirmacion-terminos">
+                <input type="checkbox"
+                       name="acepto"
+                       value="si"
+                       required>
+
+                <span>
+                    Leí y acepto los términos y condiciones y la
+                    política de privacidad.
+                </span>
+            </label>
+
+            <div class="botones-terminos">
+
+                <button class="boton-terminos boton-aceptar" type="submit" name="decision" value="aceptar">
+                    ✓ Aceptar y continuar
+                </button>
+
+                <button class="boton-terminos boton-rechazar" type="submit" name="decision" value="rechazar" formnovalidate>
+                    ✕ Rechazar
+                </button>
+
+            </div>
+        </form>
+
+        <footer class="nota-terminos">
+            Al continuar, confirmás que leíste y aceptaste los
+            términos y condiciones y la política de privacidad
+            de CoopProa.
+        </footer>
+
+    </main>
+
+</body>
+</html>

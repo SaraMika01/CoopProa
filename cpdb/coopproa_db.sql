@@ -39,11 +39,11 @@ select * from productos;
 select * from proveedores;
 select id_prov from proveedores;
 
-insert into proveedores (nombre, contacto) values('Distribuidora Alimentos S.A.','3512078585');
-insert into proveedores (nombre, contacto) values('TecnoWorld Alimentos S.A.','3512078585');
-insert into proveedores (nombre, contacto) values('Distribuidora Alimentos S.A.', '3512078585');
-insert into proveedores (nombre, contacto) values('Distribuidora Alimentos S.A.','3512078585');
-insert into proveedores (nombre, contacto) values('Distribuidora Alimentos S.A.','3512078585');
+INSERT INTO proveedores (nombre_prov, contacto) VALUES ('Distribuidora Alimentos S.A.', '3512078585');
+INSERT INTO proveedores (nombre_prov, contacto) VALUES ('Tecnoworld Alimentos S.A.', '3512078585');
+INSERT INTO proveedores (nombre_prov, contacto) VALUES ('Distribuidora Alimentos S.A.', '3512078585');
+INSERT INTO proveedores (nombre_prov, contacto) VALUES ('Distribuidora Alimentos S.A.', '3512078585');
+insert into proveedores (nombre_prov, contacto) values ('Distribuidora Alimentos S.A.', '3512078585');
 
 insert into historial_ventas (nom_prod, cantidad, total,precio) values('Chupetin_de_fresa', 4, 400.0, default);
 insert into historial_ventas (nom_prod, cantidad, total,precio) values('Chesitos', 1, 800.0, default);
