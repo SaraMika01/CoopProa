@@ -219,6 +219,16 @@ def inventario_js():
     return send_from_directory(os.path.dirname(__file__), "inventario.js")
 
 
+@app.route("/terminos")
+def terminos():
+    return render_template("terminos.html")
+
+
+@app.route("/privacidad")
+def privacidad():
+    return render_template("privacidad.html")
+
+
 if __name__ == "__main__":
     preparar_esquema()
     app.run(debug=True)
