@@ -27,7 +27,7 @@ html {
 /*This body selector is used to set the page background and base text styles.*/
 body {
     margin: 0;
-    background: #202121;
+    background: var(--fondo);
     color: var(--texto);
     font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
@@ -868,4 +868,27 @@ button,input,select,textarea {
     .summary-card {
         padding: 16px 20px;
     }
+}
+.legal-footer {
+    padding: 20px;
+    text-align: center;
+    background: var(--fondo);
+    border-top: 1px solid var(--borde);
+}
+
+.legal-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.legal-links a {
+    color: var(--azul);
+    text-decoration: none;
+}
+
+.legal-links a:hover {
+    text-decoration: underline;
 }

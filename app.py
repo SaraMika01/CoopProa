@@ -109,6 +109,15 @@ def inicio():
     }
     return render_template("index.html", resumen=resumen)
 
+@app.route("/terminos")
+def terminos():
+    return render_template("terminos.html")
+
+
+@app.route("/privacidad")
+def privacidad():
+    return render_template("privacidad.html")
+
 
 @app.route("/inventario", methods=["GET", "POST"])
 def inventario():

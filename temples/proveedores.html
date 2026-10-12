@@ -29,6 +29,12 @@
                     <a class="nav-link active" href="{{ url_for('proveedores') }}"> Proveedores </a>
                 </li>
             </ul>
+             <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('terminos') }}">Términos y condiciones</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('privacidad') }}">Política de privacidad</a>
+            </li>
         </div>
     </div>
 </nav>
@@ -44,35 +50,47 @@
         </button>
     </div>
     <div class="row g-4">
-        {% for proveedor in proveedores %}
-        <div class="col-12 col-xl-6">
-            <article class="provider-card">
-                <div class="provider-top">
-                    <div class="provider-icon">
-                        <i class="bi bi-basket3"></i>
-                    </div>
-                    <div>
-                        <h2>{{ proveedor.nombre_prov }}</h2>
-                        <p>{{ proveedor.contacto or 'Sin contacto' }}</p>
-                    </div>
+    {% for proveedor in proveedores %}
+    <div class="col-12 col-xl-6">
+        <article class="provider-card">
+            <div class="provider-top">
+                <div class="provider-icon">
+                    <i class="bi bi-basket3"></i>
                 </div>
-                <h3> Últimas compras </h3>
-                <div class="purchase-grid">
-                    <div class="purchase">
-                        <div class="purchase-photo"><i class="bi bi-bag-check"></i></div>
-                        <span>Compras registradas</span>
-                        <small>Operaciones con este proveedor</small>
-                        <strong>{{ proveedor.compras }}</strong>
-                    </div>
-                    <div class="purchase-total"> Total gastado:
-                        <strong> ${{ proveedor.total_compras }} </strong>
-                    </div>
+
+                <div>
+                    <h2>{{ proveedor.nombre_prov }}</h2>
+                    <p>{{ proveedor.contacto or 'Sin contacto' }}</p>
                 </div>
-            </article>
-        </div>
-        </div>
-        {% else %}<p>No hay proveedores registrados.</p>{% endfor %}
+            </div>
+
+            <h3>Últimas compras</h3>
+
+            <div class="purchase-grid">
+                <div class="purchase">
+                    <div class="purchase-photo">
+                        <i class="bi bi-bag-check"></i>
+                    </div>
+
+                    <span>Compras registradas</span>
+                    <small>Operaciones con este proveedor</small>
+                    <strong>{{ proveedor.compras }}</strong>
+                </div>
+
+                <div class="purchase-total">
+                    Total gastado:
+                    <strong>${{ proveedor.total_compras }}</strong>
+                </div>
+            </div>
+        </article>
     </div>
+    {% else %}
+    <div class="col-12">
+        <p>No hay proveedores registrados.</p>
+    </div>
+    {% endfor %}
+</div>
+                
 </main>
 <div class="modal fade" id="proveedorModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered"><div class="modal-content rounded-4">
@@ -83,6 +101,13 @@
         </div><div class="modal-footer"><button class="btn btn-primary" type="submit">Guardar</button></div></form>
     </div></div>
 </div>
+<footer class="legal-footer">
+    <div class="legal-links">
+        <a href="{{ url_for('terminos') }}">Términos y condiciones</a>
+        <span>|</span>
+        <a href="{{ url_for('privacidad') }}">Política de privacidad</a>
+    </div>
+</footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="{{ url_for('app_js') }}"></script>
 </body>

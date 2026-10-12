@@ -1,27 +1,35 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Términos y condiciones | CoopProa</title>
-    <style>
-        body { margin: 0; font-family: Arial, sans-serif; background: #f4f6f8; color: #24313b; line-height: 1.65; }
-        header { background: #173f35; color: white; padding: 2rem 1rem; }
-        header div, main, footer { max-width: 900px; margin: auto; }
-        main { box-sizing: border-box; background: white; margin-top: 2rem; margin-bottom: 2rem; padding: 2rem; border-radius: 12px; }
-        h1 { margin: 0; }
-        h2 { color: #173f35; font-size: 1.2rem; margin-top: 1.8rem; }
-        a { color: #176b55; }
-        footer { padding: 1rem; text-align: center; color: #52616b; }
-    </style>
+    <title>CoopProa | Términos y condiciones</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-<header>
-    <div><h1>Términos y condiciones de uso</h1></div>
-</header>
+    <nav class="navbar navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('inicio') }}">CoopProa</a>
+            <a class="nav-link" href="{{ url_for('inicio') }}">Volver al inicio</a>
+        </div>
+    </nav>
 
-<main>
+    <main class="page-container">
+        <div class="page-title">
+            <div>
+                <span class="eyebrow">INFORMACIÓN LEGAL</span>
+                <h1>Términos y condiciones</h1>
+            </div>
+        </div>
+
+        <section class="white-card">
+            
+        </section>
+    </main>
+</body>
+</html>
     <p><strong>CoopProa</strong></p>
 
     <h2>1. Finalidad y alcance</h2>
