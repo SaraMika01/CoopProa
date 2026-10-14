@@ -32,12 +32,21 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('proveedores') }}"> Proveedores</a>
                         </li>
+                    </ul>
+                    <form method="post" action="{{ url_for('logout') }}" class="ms-lg-2">
+                        <button class="btn btn-sm btn-outline-light" type="submit">Cerrar sesión</button>
+                    </form>
                 </div>
             </div>
         </nav>
 
     <!-- This <main> tag is used to contain the main content of the home page. -->
     <main class="page-container">
+        {% with mensajes = get_flashed_messages(with_categories=true) %}
+            {% for categoria, mensaje in mensajes %}
+            <div class="alert alert-{{ categoria }}" role="alert">{{ mensaje }}</div>
+            {% endfor %}
+        {% endwith %}
         <section class="hero-card">
             <div>
                 <span class="eyebrow"> COOPPROA</span>

@@ -27,12 +27,13 @@
                     <a class="nav-link" href="{{ url_for('proveedores') }}"> Proveedores</a>
                 </li>
             </ul>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('terminos') }}">Términos y condiciones</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('privacidad') }}">Política de privacidad</a>
-            </li>
+            <form method="post" action="{{ url_for('logout') }}" class="ms-lg-2">
+                <button class="btn btn-sm btn-outline-light" type="submit">Cerrar sesión</button>
+            </form>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('terminos') }}">Términos</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('privacidad') }}">Privacidad</a></li>
+            </ul>
         </div>
     </div>
 </nav>
@@ -59,9 +60,15 @@
             <button class="category active" data-category="Todos"> Todos </button>
             <button class="category" data-category="Snacks"> Snacks </button>
             <button class="category" data-category="Bebidas"> Bebidas </button>
+            <button class="category" data-category="Comidas"> Comidas </button>
             <button class="category" data-category="Suministros"> Suministros </button>
         </div>
     </section>
+    {% with mensajes = get_flashed_messages(with_categories=true) %}
+        {% for categoria, mensaje in mensajes %}
+        <div class="alert alert-{{ categoria }}" role="alert">{{ mensaje }}</div>
+        {% endfor %}
+    {% endwith %}
     <section id="listaProductos" class="product-list">
         {% for producto in productos %}
         <article class="inventory-card" data-name="{{ producto.nombre_prod }}" data-category="{{ producto.categoria }}">
@@ -99,7 +106,8 @@
                         <option value=""> Seleccionar categoría</option>
                         <option value="Snacks">Snacks</option>
                         <option value="Bebidas"> Bebidas</option>
-                        <option value="Comidas"> Comidas</option>
+                        <option value="Comidas">Comidas</option>
+                        <option value="Suministros">Suministros</option>
                     </select>
                     <input type="number" name="precio_costo" class="form-control mb-3" placeholder="Precio de costo" min="0" step="0.01">
                     <input type="number" name="porcentaje_ganancia" class="form-control mb-3" placeholder="Porcentaje de ganancia" min="0" step="0.01">

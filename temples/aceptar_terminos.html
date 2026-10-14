@@ -13,6 +13,9 @@
         <p class="subtitulo-header">
             Cooperativa del colegio
         </p>
+        <form method="post" action="{{ url_for('logout') }}">
+            <button class="btn btn-sm btn-outline-light" type="submit">Cerrar sesión</button>
+        </form>
     </header>
 
     <main class="contenedor-terminos">

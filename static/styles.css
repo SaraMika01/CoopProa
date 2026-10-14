@@ -893,6 +893,42 @@ button,input,select,textarea {
     text-decoration: underline;
 }
 
+.auth-container {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: radial-gradient(circle at top right, #e9ebff, transparent 40%), var(--fondo);
+}
+.auth-card {
+    width: min(100%, 460px);
+    padding: clamp(26px, 6vw, 44px);
+    background: var(--blanco);
+    border: 1px solid var(--borde);
+    border-radius: 28px;
+    box-shadow: var(--sombra-hover);
+}
+.auth-card .navbar-brand {
+    color: var(--negro) !important;
+    text-decoration: none;
+}
+.auth-card h1 {
+    margin: 0 0 10px;
+    font-size: clamp(1.8rem, 5vw, 2.2rem);
+    font-weight: 750;
+    letter-spacing: -.04em;
+}
+.auth-card > p {
+    line-height: 1.55;
+}
+.auth-card .form-control {
+    min-height: 46px;
+    border-radius: 12px;
+}
+.auth-card .legal-links {
+    font-size: .85rem;
+}
+
 /* ===== PANTALLA DE ACEPTACIÓN COOPPROA ===== */
 .pagina-terminos {
     min-height: 100vh;
